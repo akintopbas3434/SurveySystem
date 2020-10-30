@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>DashRock - Bootstrap 4 Admin Dashboard Template</title>
+    <title>Survey System | 2020</title>
     <!--favicon-->
     <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon">
     <!-- Bootstrap core CSS-->
@@ -30,11 +30,11 @@
                         <img src="~/Content/assets/images/logo-icon.png" />
                     </div>
                     <div class="card-title text-uppercase text-center py-2 text-white">Giriş Yapınız</div>
-                    <form class="color-form">
+                    <form class="color-form" action="/Login/SignIn" method="post">
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <label for="exampleInputUsername" class="sr-only">Username</label>
-                                <input type="text" id="exampleInputUsername" class="form-control" placeholder="Username">
+                                <label for="exampleInputUsername" class="sr-only">Kod</label>
+                                <input type="text" id="exampleInputUsername" name="Code" class="form-control" placeholder="Kullanıcı Kodu" required>
                                 <div class="form-control-position">
                                     <i class="icon-user"></i>
                                 </div>
@@ -42,8 +42,8 @@
                         </div>
                         <div class="form-group">
                             <div class="position-relative has-icon-left">
-                                <label for="exampleInputPassword" class="sr-only">Password</label>
-                                <input type="password" id="exampleInputPassword" class="form-control" placeholder="Password">
+                                <label for="exampleInputPassword" class="sr-only">Şifre</label>
+                                <input type="password" id="exampleInputPassword" name="Password" class="form-control" placeholder="Şifre" required>
                                 <div class="form-control-position">
                                     <i class="icon-lock"></i>
                                 </div>
@@ -51,8 +51,16 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="button" class="btn btn-danger btn-block waves-effect waves-light">Giriş Yap</button>
+                            <button type="submit" class="btn btn-danger btn-block waves-effect waves-light">Giriş Yap</button>
                         </div>
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert-message">
+                                <span class="btn btn-danger btn-block waves-effect waves-light"><strong>İşlem Hatalı! </strong>@ViewBag.Error </span>
+                            </div>
+                        }
+
                     </form>
                 </div>
             </div>

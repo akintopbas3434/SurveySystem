@@ -8,22 +8,22 @@ using System.Web.Mvc;
 
 namespace SurveySystem.Controllers
 {
-    public class PersonController : BaseController
+    public class QuestionController : BaseController
     {
         public ActionResult Index()
         {
-            var model = db.Person.ToList();
+            var model = db.Question.ToList();
             return View(model);
         }
 
-        public ActionResult Create(Person person)
+        public ActionResult Create(Question question)
         {
-            if (person.NameSurname != null)
+            if (question.QuestionLine != null)
             {
-                person.CreateDate = DateTime.Now;
-                person.CreateBy = NameSurname;
+                question.CreateDate = DateTime.Now;
+                question.CreateBy = NameSurname;
 
-                db.Person.Add(person);
+                db.Question.Add(question);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -33,25 +33,24 @@ namespace SurveySystem.Controllers
             }
 
         }
-
         public ActionResult Edit(int? Id)
         {
             if (Id == null || Id == 0)
             {
                 return HttpNotFound();
             }
-            var model = db.Person.Find(Id);
+            var model = db.Question.Find(Id);
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(Person person)
+        public ActionResult Edit(Question question)
         {
-            db.Entry(person).State = System.Data.Entity.EntityState.Modified;
-            db.Entry(person).Property(e => e.CreateBy).IsModified = false;
-            db.Entry(person).Property(e => e.CreateDate).IsModified = false;
+            db.Entry(question).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(question).Property(e => e.CreateBy).IsModified = false;
+            db.Entry(question).Property(e => e.CreateDate).IsModified = false;
 
-            person.ModifyBy =NameSurname;
-            person.ModifyDate = DateTime.Now;
+            question.ModifyBy = NameSurname;
+            question.ModifyDate = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -61,11 +60,12 @@ namespace SurveySystem.Controllers
             {
                 return HttpNotFound();
             }
-            var person = db.Person.Find(id);
-            db.Person.Remove(person);
+            var question = db.Question.Find(id);
+            db.Question.Remove(question);
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
+
     }
 }

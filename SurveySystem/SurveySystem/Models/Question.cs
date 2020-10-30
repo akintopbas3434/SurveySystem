@@ -15,7 +15,7 @@ namespace SurveySystem.Models
     public partial class Question
     {
         public int Id { get; set; }
-        public string Question1 { get; set; }
+        public string QuestionLine { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

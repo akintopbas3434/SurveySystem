@@ -16,7 +16,7 @@ namespace SurveySystem
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Person", action = "Create", id = UrlParameter.Optional }
+                defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

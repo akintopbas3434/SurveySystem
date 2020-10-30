@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveySystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,29 @@ namespace SurveySystem.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
-        public ActionResult SingIn()
+        SurveyEntities db = new SurveyEntities();
+        public ActionResult SignIn(string Code, string Password)
         {
-            return View();
+            if (Code == null)
+            {
+                return View();
+            }
+            else
+            {
+                var person = db.Person.FirstOrDefault(x => x.Code == Code && x.Password == Password);
+
+                if (person != null)
+                {
+                    Session["Code"] = person.Code;
+                    Session["NameSurname"] = person.NameSurname;
+                    return RedirectToAction("Index", "Person");
+                }
+                else
+                {
+                    ViewBag.Error = "Kullanıcı kodu veya şifre hatalı!!";
+                    return View();
+                }
+            }
         }
     }
 }

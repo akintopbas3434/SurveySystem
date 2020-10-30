@@ -1,0 +1,24 @@
+﻿@model SurveySystem.Models.Question
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">Soru Düzenleme Sayfası</div>
+        <hr>
+        <form action="/Question/Edit" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label for="input-1">Soru Cümlesi</label>
+                <input type="text" class="form-control" name="QuestionLine" id="input-1" value="@Model.QuestionLine" placeholder="Soru Cümlesi Giriniz." maxlength="250" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-round btn-success shadow-success px-5"><i class="icon-lock"></i> Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

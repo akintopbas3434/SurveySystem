@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SurveySystem.Models.Person>
+﻿@model IEnumerable<SurveySystem.Models.Question>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,11 +9,11 @@
         <div class="col-12 col-lg-6 col-xl-6">
             <div class="card bg-dark">
                 <div class="card-body">
-                    <a href="/Person/Create">
+                    <a href="/Question/Create">
                         <div class="media">
                             <div class="media-body text-left">
-                                <h4 class="text-white">Kişi Ekleyin</h4>
-                                <span class="text-white">Kişi Eklemek İçin Tıklayın</span>
+                                <h4 class="text-white">Soru Ekleyin</h4>
+                                <span class="text-white">Soru Eklemek İçin Tıklayın</span>
                             </div>
                             <div class="align-self-center"><span id="dash-chart-1"></span></div>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="media">
                         <div class="media-body text-left">
                             <h4 class="text-white">@Model.Count()</h4>
-                            <span class="text-white">Toplam Kişi Sayısı</span>
+                            <span class="text-white">Toplam Soru Sayısı</span>
                         </div>
                         <div class="align-self-center"><span id="dash-chart-2"></span></div>
                     </div>
@@ -41,9 +41,7 @@
             <table id="example" class="table table-bordered" cellpadding="0" style="width:100%;">
                 <thead>
                     <tr class="bg-dark" style="color:white;">
-                        <td>Ad-Soyad</td>
-                        <td>Kod</td>
-                        <td>Şifre</td>
+                        <td>Soru</td>
                         <td>Ekleme Tarihi</td>
                         <td>Ekleyen</td>
                         <td>İşlemler</td>
@@ -53,17 +51,15 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.NameSurname</td>
-                            <td>@item.Code</td>
-                            <td>@item.Password</td>
+                            <td>@item.QuestionLine</td>
                             <td>@item.CreateDate</td>
                             <td>@item.CreateBy</td>
                             <td>
-                                <a class="btn btn-sm btn-dark text-white" href="/Person/Edit/@item.Id"><i class="fa fa fa-edit text-white"></i> Düzenle</a>
+                                <a class="btn btn-sm btn-dark text-white" href="/Question/Edit/@item.Id"><i class="fa fa fa-edit text-white"></i> Düzenle</a>
                                 <a class="btn btn-sm btn-pinterest text-white" onclick="Delete(@item.Id)"><i class="fa fa fa-trash-o text-white"></i> Sil</a>
                                 <script>
                                     function Delete(id) {
-                                        var link = "/Person/Delete/" + id;
+                                        var link = "/Question/Delete/" + id;
                                         jQuery("#modalLink").attr("href", link);
                                         jQuery("#deleteperson").modal();
                                     }
