@@ -21,6 +21,14 @@
                 <label for="input-3">Şifre</label>
                 <input type="password" class="form-control" name="Password" id="input-3" placeholder="Şifresinizi Giriniz." maxlength="20" required>
             </div>
+            <label for="input-3">Admin mi?</label>
+            <div class="icheck-material-primary icheck-inline">
+                <input type="radio" id="Id_1" name="isAdmin" value="@SurveySystem.Constants.AnswerType.Yes" />
+                <label for="Id_1">@SurveySystem.Constants.AnswerType.Yes</label>
+                <input type="radio" id="Id_2" name="isAdmin" value="@SurveySystem.Constants.AnswerType.No" checked/>
+                <label for="Id_2">@SurveySystem.Constants.AnswerType.No</label>
+            </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-round btn-success shadow-success px-5"><i class="icon-lock"></i> Kaydet</button>
             </div>

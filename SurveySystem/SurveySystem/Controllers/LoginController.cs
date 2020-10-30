@@ -24,7 +24,11 @@ namespace SurveySystem.Controllers
                 {
                     Session["Code"] = person.Code;
                     Session["NameSurname"] = person.NameSurname;
-                    return RedirectToAction("Index", "Person");
+                    if (person.IsAdmin == true)
+                    {
+                        Session["Admin"] = "Admin";
+                    }
+                    return RedirectToAction("Create", "Answer");
                 }
                 else
                 {
@@ -32,6 +36,11 @@ namespace SurveySystem.Controllers
                     return View();
                 }
             }
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("SignIn","Login");
         }
     }
 }

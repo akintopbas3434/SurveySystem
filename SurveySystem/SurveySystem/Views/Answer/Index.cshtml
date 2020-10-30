@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SurveySystem.Models.Person>
+﻿@model IEnumerable<SurveySystem.Models.Answer>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,11 +9,11 @@
         <div class="col-12 col-lg-6 col-xl-6">
             <div class="card bg-dark">
                 <div class="card-body">
-                    <a href="/Person/Create">
+                    <a href="/Answer/Create">
                         <div class="media">
                             <div class="media-body text-left">
-                                <h4 class="text-white">Kişi Ekleyin</h4>
-                                <span class="text-white">Kişi Eklemek İçin Tıklayın</span>
+                                <h4 class="text-white">Anket Ekleyin</h4>
+                                <span class="text-white">Anket Eklemek İçin Tıklayın</span>
                             </div>
                             <div class="align-self-center"><span id="dash-chart-1"></span></div>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="media">
                         <div class="media-body text-left">
                             <h4 class="text-white">@Model.Count()</h4>
-                            <span class="text-white">Toplam Kişi Sayısı</span>
+                            <span class="text-white">Toplam Anket Sayısı</span>
                         </div>
                         <div class="align-self-center"><span id="dash-chart-2"></span></div>
                     </div>
@@ -43,7 +43,8 @@
                     <tr class="bg-dark" style="color:white;">
                         <td>Ad-Soyad</td>
                         <td>Kod</td>
-                        <td>Şifre</td>
+                        <td>Skor</td>
+                        <td>Tamamlanma Durumu</td>
                         <td>Ekleme Tarihi</td>
                         <td>Ekleyen</td>
                         <td>İşlemler</td>
@@ -52,24 +53,24 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@item.NameSurname</td>
-                            <td>@item.Code</td>
-                            <td>@item.Password</td>
-                            <td>@item.CreateDate</td>
-                            <td>@item.CreateBy</td>
-                            <td>
-                                <a class="btn btn-sm btn-dark text-white" href="/Person/Edit/@item.Id"><i class="fa fa fa-edit text-white"></i> Düzenle</a>
-                                <a class="btn btn-sm btn-pinterest text-white" onclick="Delete(@item.Id)"><i class="fa fa fa-trash-o text-white"></i> Sil</a>
-                                <script>
-                                    function Delete(id) {
-                                        var link = "/Person/Delete/" + id;
-                                        jQuery("#modalLink").attr("href", link);
-                                        jQuery("#deleteperson").modal();
-                                    }
-                                </script>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@item.PersonName</td>
+                        <td>@item.PersonCode</td>
+                        <td>@item.Score</td>
+                        @if (item.IsComplete == true)
+                        {
+                            <td>@SurveySystem.Constants.AnswerType.Yes</td>
+                        }
+                        else
+                        {
+                            <td>@SurveySystem.Constants.AnswerType.No</td>
+                        }
+                        <td>@item.CreateDate</td>
+                        <td>@item.CreateBy</td>
+                        <td>
+                            <a class="btn btn-sm btn-dark text-white" href="/Answer/Detail/@item.Id"><i class="fa fa fa-edit text-white"></i> Düzenle</a>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
@@ -100,33 +101,3 @@
         });
     })(jQueryCalis);
 </script>
-
-<div class="modal fade" id="deleteperson">
-
-    <div class="modal-dialog">
-        <div class="modal-content border-danger">
-            <div class="modal-header bg-danger">
-                <h5 class="modal-title text-white">
-                    <i class="fa fa-star"></i>
-                    Silme İşlemi
-                </h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Kayıt silinecektir emin misiniz?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    <i class="fa fa-times"></i>
-                    Kapat
-                </button>
-                <a class="btn btn-danger" id="modalLink">
-                    <i class="fa fa-check-square-o"></i>
-                    Sil
-                </a>
-            </div>
-        </div>
-    </div>
-</div>

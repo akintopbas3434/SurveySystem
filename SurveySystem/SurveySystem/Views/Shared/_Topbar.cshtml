@@ -8,18 +8,31 @@
         </ul>
         <ul class="navbar-nav align-items-center right-nav-link">
             <li class="nav-item dropdown-lg">
-                <a class="nav-link waves-effect" href="/Person/Index">
-                    <i class="icon-people"></i>
+                <a class="nav-link waves-effect" href="/Answer/Index">
+                    <i class="icon-folder"></i>
                 </a>
+            </li>
+            <li class="nav-item dropdown-lg">
+                <a class="nav-link waves-effect" href="/Answer/Create">
+                    <i class="icon-pencil"></i>
+                </a>
+            </li>
+            @if (Session["Admin"] != null)
+            {
+                <li class="nav-item dropdown-lg">
+                    <a class="nav-link waves-effect" href="/Person/Index">
+                        <i class="icon-people"></i>
+                    </a>
 
-            </li>
+                </li>
+                <li class="nav-item dropdown-lg">
+                    <a class="nav-link waves-effect" href="/Question/Index">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+            }
             <li class="nav-item dropdown-lg">
-                <a class="nav-link waves-effect" href="/Question/Index">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="nav-item dropdown-lg">
-                <a class="nav-link waves-effect" href="/Login/SignIn">
+                <a class="nav-link waves-effect" href="/Login/LogOut">
                     <i class="icon-power"></i>
                 </a>
             </li>

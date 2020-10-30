@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SurveySystem.Models.AnswerLine>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int number = 1;
+}
+
+<div class="card p-1">
+    <div class="card-body">
+        <h5 class="text-center">Anket Detay Sayfası</h5>
+        <div class="table-responsive">
+            @foreach (var item in Model)
+            {
+                <span><b>@number)</b>@item.Question</span>
+                <br />
+                <strong>@item.Answer</strong>
+                <br /><br />
+                number++;
+            }
+        </div>
+    </div>
+
+</div>

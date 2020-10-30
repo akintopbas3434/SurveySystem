@@ -12,16 +12,28 @@ namespace SurveySystem.Controllers
     {
         public ActionResult Index()
         {
-            var model = db.Person.ToList();
-            return View(model);
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("SignIn", "Login");
+            }
+            else
+            {
+                var model = db.Person.ToList();
+                return View(model);
+            }
         }
 
-        public ActionResult Create(Person person)
+        public ActionResult Create(Person person, string isAdmin)
         {
             if (person.NameSurname != null)
             {
                 person.CreateDate = DateTime.Now;
                 person.CreateBy = NameSurname;
+
+                if (isAdmin == Constants.AnswerType.Yes)
+                    person.IsAdmin = true;
+                else
+                    person.IsAdmin = false;
 
                 db.Person.Add(person);
                 db.SaveChanges();
@@ -44,14 +56,20 @@ namespace SurveySystem.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(Person person)
+        public ActionResult Edit(Person person, string isAdmin)
         {
             db.Entry(person).State = System.Data.Entity.EntityState.Modified;
             db.Entry(person).Property(e => e.CreateBy).IsModified = false;
             db.Entry(person).Property(e => e.CreateDate).IsModified = false;
 
-            person.ModifyBy =NameSurname;
+            person.ModifyBy = NameSurname;
             person.ModifyDate = DateTime.Now;
+            
+            if (isAdmin == Constants.AnswerType.Yes)
+                person.IsAdmin = true;
+            else
+                person.IsAdmin = false;
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }
